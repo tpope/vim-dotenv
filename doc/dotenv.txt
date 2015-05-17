@@ -1,0 +1,22 @@
+*dotenv.txt*  Basic support for .env and Procfile
+
+Author:  Tim Pope <http://tpo.pe/>
+Repo:    https://github.com/tpope/vim-obsession
+License: Same terms as Vim itself (see |license|)
+
+USAGE                                           *dotenv* *:Dotenv*
+
+:Dotenv {file}          Load the dotenv file {file} and assign the given
+                        environment variables globally in the current Vim
+                        session.  Use |:verbose| to see what actually gets
+                        assigned.
+
+:Dotenv {dir}           Equivalent to :Dotenv {dir}/.env.
+
+:Dotenv                 Show the environment for the current buffer.
+
+API                                             *dotenv-api*
+
+See the top of plugin/dotenv.vim.
+
+ vim:tw=78:et:ft=help:norl:

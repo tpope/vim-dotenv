@@ -1,0 +1,8 @@
+{
+  "vim_script_nr": 5176,
+  "name": "dotenv",
+  "version": "1.0",
+  "author": "Tim Pope <http://tpo.pe/>",
+  "repository" : {"type": "git", "url": "git://github.com/tpope/vim-dotenv.git"},
+  "description": "Basic support for .env and Procfile"
+}
