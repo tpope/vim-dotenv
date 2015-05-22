@@ -162,27 +162,20 @@ endif
 let g:dispatch_compilers['dotenv'] = ''
 let g:dispatch_compilers['foreman run'] = ''
 
-function! s:setup_projections() abort
-  if !get(g:, 'loaded_projectionist')
-    return
-  endif
-  if !exists('g:projectionist_heuristics')
-    let g:projectionist_heuristics = {}
-  endif
-  if !has_key(g:projectionist_heuristics, "Procfile")
-    let g:projectionist_heuristics["Procfile"] = {
-          \ "Procfile": {"dispatch": "foreman check"},
-          \ "*": {"start": "foreman start"}}
-  endif
-endfunction
+if !exists('g:projectionist_heuristics')
+  let g:projectionist_heuristics = {}
+endif
+if !has_key(g:projectionist_heuristics, "Procfile")
+  let g:projectionist_heuristics["Procfile"] = {
+        \ "Procfile": {"dispatch": "foreman check"},
+        \ "*": {"start": "foreman start"}}
+endif
 
 augroup dotenvPlugin
   autocmd BufNewFile,BufReadPost .env.* setfiletype sh
 
   autocmd BufNewFile,BufReadPre * let b:dotenv = DotenvRead()
   autocmd FileType netrw          let b:dotenv = DotenvRead()
-
-  autocmd VimEnter * call s:setup_projections()
 augroup END
 
 " vim:set et sw=2 foldmethod=expr foldexpr=getline(v\:lnum)=~'^\"\ Section\:'?'>1'\:getline(v\:lnum)=~#'^fu'?'a1'\:getline(v\:lnum)=~#'^endf'?'s1'\:'=':
