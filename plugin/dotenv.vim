@@ -18,8 +18,20 @@ endfunction
 " Drop in replacement for expand() that takes the current buffer's .env into
 " account.
 function! DotenvExpand(str, ...) abort
-  return call('expand', [substitute(a:str, '\$\(\w\+\)',
-        \ '\=empty(DotenvGet(submatch(1))) ? submatch(0) : fnameescape(DotenvGet(submatch(1)))', 'g')] + a:000)
+  let str = a:str
+  let pat = '\$\(\w\+\)'
+  let end = 0
+  while 1
+    let pos = match(str, pat, end)
+    if pos < 0
+      break
+    endif
+    let var = matchstr(str, pat, end)
+    let end = pos + len(var)
+    let val = DotenvGet(var)
+    let str = strpart(str, 0, pos) . (empty(val) ? var : fnameescape(val)) . strpart(str, end)
+  endwhile
+  return call('expand', [str] + a:000)
 endfunction
 
 " Find the nearest .env file.
