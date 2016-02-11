@@ -1,7 +1,7 @@
 *dotenv.txt*  Basic support for .env and Procfile
 
 Author:  Tim Pope <http://tpo.pe/>
-Repo:    https://github.com/tpope/vim-obsession
+Repo:    https://github.com/tpope/vim-dotenv
 License: Same terms as Vim itself (see |license|)
 
 USAGE                                           *dotenv* *:Dotenv*
