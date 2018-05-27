@@ -177,10 +177,9 @@ let g:dispatch_compilers['foreman run'] = ''
 if !exists('g:projectionist_heuristics')
   let g:projectionist_heuristics = {}
 endif
-if !has_key(g:projectionist_heuristics, "Procfile") && executable('foreman')
+if !has_key(g:projectionist_heuristics, "Procfile")
   let g:projectionist_heuristics["Procfile"] = {
-        \ "Procfile": {"dispatch": "foreman check"},
-        \ "*": {"start": "foreman start"}}
+        \ "Procfile": {"dispatch": get(g:, "foreman", "foreman") . " check"}}
 endif
 
 augroup dotenvPlugin
