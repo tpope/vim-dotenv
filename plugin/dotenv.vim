@@ -43,7 +43,9 @@ endfunction
 function! DotenvRead(...) abort
   let env = {}
   for file in a:0 ? a:000 : [DotenvFile()]
-    call s:read_env(isdirectory(file) ? file.'/.env' : file, env)
+    if len(file)
+      call s:read_env(isdirectory(file) ? file.'/.env' : file, env)
+    endif
   endfor
   return env
 endfunction
