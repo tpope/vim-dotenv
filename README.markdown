@@ -29,17 +29,21 @@ the plugin.  Other plugins can call `DotenvGet('VAR')` to get the value of
 `$VAR` globally or from the current buffer's `.env`.  Here's a wrapper to
 optionally use `DotenvGet()` if it's available.
 
-    function! s:env(var) abort
-      return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
-    endfunction
+```vim
+function! s:env(var) abort
+  return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
+endfunction
 
-    let db_url = s:env('DATABASE_URL')
+let db_url = s:env('DATABASE_URL')
+```
 
 There's also `DotenvExpand()`, a drop-in replacement for `expand()`.
 
-    function! s:expand(expr) abort
-      return exists('*DotenvExpand') ? DotenvExpand(a:expr) : expand(a:expr)
-    endfunction
+```vim
+function! s:expand(expr) abort
+  return exists('*DotenvExpand') ? DotenvExpand(a:expr) : expand(a:expr)
+endfunction
+```
 
 ## License
 
