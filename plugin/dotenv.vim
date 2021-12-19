@@ -6,7 +6,10 @@ let g:loaded_dotenv = 1
 " Get the value of a variable from the global Vim environment or current
 " buffer's .env.
 function! DotenvGet(...) abort
-  let env = get(b:, 'dotenv', {})
+  if !exists('b:dotenv')
+    let b:dotenv = DotenvRead()
+  endif
+  let env = b:dotenv
   if !a:0
     " Use this to get the current .env, as b:dotenv is private.
     return env
@@ -127,7 +130,7 @@ function! s:Load(bang, ...) abort
       echohl Comment
       echon (&verbose ? '" ' :  '# ').fnamemodify(file, ':~:.')
       echohl None
-      let env = get(b:, 'dotenv', DotenvRead())
+      let env = DotenvGet()
       for var in sort(keys(env))
         echon "\n"
         if &verbose
@@ -188,8 +191,8 @@ endif
 augroup dotenvPlugin
   autocmd BufNewFile,BufReadPost .env.* setfiletype sh
 
-  autocmd BufNewFile,BufReadPre * let b:dotenv = DotenvRead()
-  autocmd FileType netrw          let b:dotenv = DotenvRead()
+  autocmd BufNewFile,BufReadPre * unlet! b:dotenv
+  autocmd FileType netrw          unlet! b:dotenv
 augroup END
 
 " vim:set et sw=2 foldmethod=expr foldexpr=getline(v\:lnum)=~'^\"\ Section\:'?'>1'\:getline(v\:lnum)=~#'^fu'?'a1'\:getline(v\:lnum)=~#'^endf'?'s1'\:'=':
