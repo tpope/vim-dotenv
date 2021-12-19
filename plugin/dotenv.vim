@@ -47,6 +47,7 @@ function! DotenvRead(...) abort
       call s:read_env(isdirectory(file) ? file.'/.env' : file, env)
     endif
   endfor
+  lockvar! env
   return env
 endfunction
 
