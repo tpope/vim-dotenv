@@ -194,5 +194,3 @@ augroup dotenvPlugin
   autocmd BufNewFile,BufReadPre * unlet! b:dotenv
   autocmd FileType netrw          unlet! b:dotenv
 augroup END
-
-" vim:set et sw=2 foldmethod=expr foldexpr=getline(v\:lnum)=~'^\"\ Section\:'?'>1'\:getline(v\:lnum)=~#'^fu'?'a1'\:getline(v\:lnum)=~#'^endf'?'s1'\:'=':
