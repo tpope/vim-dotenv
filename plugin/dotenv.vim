@@ -106,13 +106,13 @@ function! s:read_env(file, ...) abort
 endfunction
 
 function! s:echo_let(var, val) abort
-  echohl VimLet
+  echohl Statement
   echon 'let '
-  echohl vimEnvvar
+  echohl PreProc
   echon '$'.a:var
-  echohl vimOper
+  echohl Operator
   echon ' = '
-  echohl vimString
+  echohl String
   echon string(a:val)
   echohl None
 endfunction
