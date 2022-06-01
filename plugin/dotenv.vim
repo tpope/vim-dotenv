@@ -195,6 +195,13 @@ if !has_key(g:projectionist_heuristics, "Procfile")
         \ "Procfile": {"dispatch": get(g:, "foreman", "foreman") . " check"}}
 endif
 
+if exists('g:dotenv_autoload')
+  let file = DotenvFile()
+  if !empty(file)
+    execute s:Load(0, file)
+  endif
+endif
+
 augroup dotenvPlugin
   autocmd BufNewFile,BufReadPost .env.* setfiletype sh
 
